@@ -22,4 +22,22 @@ import React, { useState } from "react";
     https://reactjs.org/docs/hooks-reference.html#usereducer
 */
 
-export const Form = () => {};
+export const Form = () => {
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        setEmail(e.target.email.value);
+        setPassword(e.target.password.value);
+    }
+
+    return (
+        <form onSubmit={(e) => handleSubmit(e)}>
+            <input id='email-input' type="text" name='email' data-testid='email-input'/>
+            <input id='password-input' type="password" name='password' data-testid='password-input'/>
+            <input id='submit' type="submit" data-testid='submit'/>
+            <div data-testid="success-message">{(email && password) && 'Вы вошли'}</div>
+        </form>
+    )
+};
